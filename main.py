@@ -5,6 +5,12 @@ import os
 
 # 环境变量获取 Token
 TOKEN = os.environ.get("PUSHPLUS_TOKEN")
+# 调试代码：检查 Token 是否加载
+if TOKEN:
+    print(f"DEBUG: Token已加载，开头为: {TOKEN[:4]}****")
+else:
+    print("DEBUG: 警告！Token未加载成功！")
+
 # 关键词
 KEYWORDS = ["中考", "高考", "招生", "分数线", "志愿", "录取", "发布", "时间"]
 
