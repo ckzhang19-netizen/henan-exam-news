@@ -55,7 +55,7 @@ def fetch_haeea():
         
         list_div = soup.find('div', class_='mainlist') or soup.find('div', class_='listcontent')
         links = list_div.find_all('a') if list_div else soup.find_all('a')
-        
+        print("DEBUG RAW LINKS:", [l.get('href') for l in links[:5]])
         return filter_and_format(links, '考试院', base_url)
     except Exception as e:
         print(f"Error: 考试院抓取出错: {e}")
