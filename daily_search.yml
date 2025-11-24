@@ -1,0 +1,28 @@
+name: 每日搜索引擎招考推送
+
+on:
+  schedule:
+    - cron: '30 0 * * *' # 北京时间每天早上 8:30 运行，比采集脚本晚半小时
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 下载代码
+      uses: actions/checkout@v2
+
+    - name: 设置 Python 环境
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: 安装依赖库
+      run: |
+        pip install requests beautifulsoup4
+
+    - name: 运行搜索引擎脚本
+      env:
+        PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+      run: python search_news.py
