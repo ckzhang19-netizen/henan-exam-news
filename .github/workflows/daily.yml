@@ -1,0 +1,20 @@
+name: 每日河南招考推送
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天北京时间早8点
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    - run: pip install requests beautifulsoup4
+    - name: 运行
+      env:
+        PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+      run: python main.py
